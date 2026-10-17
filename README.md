@@ -51,8 +51,8 @@ Everything else in the file has to match.
 
 | file | size (bytes) | SHA-256 |
 |---|---:|---|
-| `AAT-steam-enhanced-v1.0.xdelta` (the patch) | 17,832,631 | `25d2af5185bb15fb4db5cbf5595feeb11f269eb28d22cc3a6fe4d60bff6885a0` |
-| the patched `.cia` you'll make | 386,155,520 | `fcffbbd930bf27549ecc3e08c85fcd92dd82a45a66d1b088f478945700d5ad0d` |
+| `AAT-steam-enhanced-v1.0.1.xdelta` (the patch) | 17,833,155 | `d95b0daed93530b20ed55c03d2a20c7a120da8ee8a461abe87c70606971f1284` |
+| the patched `.cia` you'll make | 386,155,520 | `1998cb358e536b16ed3d3245dc7ffbd5b0d3a3a36d34d196dcad0850282cbdba` |
 
 The `.cia` isn't posted anywhere. You make it from your own copy with the patch, then check
 its SHA-256 against the table.
@@ -64,14 +64,14 @@ You need a decrypted `.cci` from the section above and one of these two tools.
 **With xdelta UI** (a small window for xdelta):
 
 1. Open xdelta UI and go to the Patch tab.
-2. Source file: your decrypted `.cci`. Patch: `AAT-steam-enhanced-v1.0.xdelta`.
-3. Choose where to save the output, and name it `AAT-steam-enhanced-v1.0.cia`.
+2. Source file: your decrypted `.cci`. Patch: `AAT-steam-enhanced-v1.0.1.xdelta`.
+3. Choose where to save the output, and name it `AAT-steam-enhanced-v1.0.1.cia`.
 4. Press Patch. It writes a file of 386,155,520 bytes.
 
 **With the xdelta3 command line**, in Windows PowerShell, in the folder that holds the files:
 
 ```powershell
-.\xdelta3.exe -d -s "your-game.cci" "AAT-steam-enhanced-v1.0.xdelta" "AAT-steam-enhanced-v1.0.cia"
+.\xdelta3.exe -d -s "your-game.cci" "AAT-steam-enhanced-v1.0.1.xdelta" "AAT-steam-enhanced-v1.0.1.cia"
 ```
 
 Put the real name of your `.cci` in place of `your-game.cci`. If the patch is applied
@@ -82,10 +82,10 @@ against the wrong source, xdelta3 stops with an error.
 In Windows PowerShell:
 
 ```powershell
-Get-FileHash "AAT-steam-enhanced-v1.0.cia" -Algorithm SHA256
+Get-FileHash "AAT-steam-enhanced-v1.0.1.cia" -Algorithm SHA256
 ```
 
-The hash has to be `fcffbbd930bf27549ecc3e08c85fcd92dd82a45a66d1b088f478945700d5ad0d`. If it is, the source was right and the file is good. If
+The hash has to be `1998cb358e536b16ed3d3245dc7ffbd5b0d3a3a36d34d196dcad0850282cbdba`. If it is, the source was right and the file is good. If
 it isn't, don't install it. See Troubleshooting.
 
 ## Install
@@ -95,11 +95,14 @@ a 3DS with custom firmware. You don't need to delete the original first: it inst
 US trilogy under the same title ID, so your saves stay where they are. Mine were still there
 after installing it over the original. Back them up first anyway; the patch doesn't touch them.
 
+If you're updating from v1.0, apply this patch to your original decrypted `.cci` again. The
+patch is built against the original game, so your v1.0 `.cia` can't be its source.
+
 If you have a LayeredFS mods folder for this game (Luma's `luma/titles/0004000000138F00`),
 remove or disable it. Files in that folder are loaded instead of the game's own and would hide
 the patch.
 
-**To check it took:** the title screen reads **Steam Enhanced v1.0** at the bottom right,
+**To check it took:** the title screen reads **Steam Enhanced v1.0.1** at the bottom right,
 under the end of the TRILOGY bar.
 
 The patched `.cia` also runs on Azahar, which is what I used for most of my testing.
@@ -114,7 +117,7 @@ The patched `.cia` also runs on Azahar, which is what I used for most of my test
   right, the source is the problem: dump again as above.
 - **xdelta UI reports an error.** Check that the source and patch are the right files and the
   output folder is writable. A checksum mismatch means the source, as in the first item.
-- **The title screen doesn't say Steam Enhanced v1.0.** Check that the install finished and
+- **The title screen doesn't say Steam Enhanced v1.0.1.** Check that the install finished and
   that you started the US trilogy, and remove or disable any LayeredFS mods folder for this
   game, since its files override the patched ones.
 - **The decryptor gave me a different file name or no `.cci`.** The patch needs the `.cci` of
@@ -128,6 +131,10 @@ Finished:
 - I tested v0.13 on a real New 3DS XL. All three games boot, and I played the start of each
   game's first trial. v1.0 is v0.13 plus the title-screen lettering, nothing else, and I booted
   it on the same console to see the new title screen.
+- v1.0.1 is v1.0 with a data-only change, like v1.0: some animation poses now play in the
+  right spot, about fifteen animations run at the original 3DS timing, and the title screen
+  says v1.0.1. The executable and every picture other than the title logo are the same as v1.0.
+  I checked the characters whose poses it moves on the Azahar emulator, by capture. Two of those poses never came up on screen, so I checked them in the data only.
 - Late-game scenes and the pieces I fixed late are checked in the data. Several I also checked
   on the emulator by swapping them into early scenes of each game.
 - Existing saves load. Mine carried over when I installed the patched game over the original
@@ -135,6 +142,7 @@ Finished:
 
 Not finished:
 
+- I haven't run v1.0.1 on a real 3DS yet.
 - Late-game scenes haven't been played on real hardware.
 - Some character files are larger than the originals. Every character I brought on screen in the emulator or
   on the console loaded and played correctly. Characters I didn't bring on screen haven't been
