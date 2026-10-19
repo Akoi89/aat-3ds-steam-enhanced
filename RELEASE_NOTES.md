@@ -1,6 +1,6 @@
 # Release Notes
 
-This patch brings the character art, the repainted backgrounds and the evidence icons from Capcom's Steam release of the Ace Attorney Trilogy onto the US 3DS version, and puts back many of the animation frames the 3DS release cut. It's an xdelta patch you apply to your own copy of the game, and it leaves the dialogue, the music and your saves alone.
+This patch brings the character art, the repainted backgrounds and the evidence icons from Capcom's Steam release of the Ace Attorney Trilogy onto the US 3DS version, and puts back many of the animation frames the 3DS release cut. It's an xdelta patch you apply to your own copy of the game, with an optional LayeredFS zip for Luma3DS, and it leaves the dialogue, the music and your saves alone.
 
 ## What this build does
 
@@ -14,7 +14,7 @@ This patch brings the character art, the repainted backgrounds and the evidence 
 
 ## Version history
 
-- **v1.0.1**: in the animation sets of a few characters, some poses were assigned to the wrong spot, so a scene could show the wrong version of a character, such as a different outfit or expression than the original game plays there. Each spot now plays the animation the original 3DS game assigns it. About fifteen animations also played noticeably faster or slower than on the original 3DS, because restored frames had changed their length, and their timing now follows the original. The title screen reads "Steam Enhanced v1.0.1". Nothing else changed: the executable and every picture other than the title logo are the same as v1.0.
+- **v1.0.1**: in the animation sets of a few characters, some poses were assigned to the wrong spot, so a scene could show the wrong version of a character, such as a different outfit or expression than the original game plays there. Each spot now plays the animation the original 3DS game assigns it. About fifteen animations also played noticeably faster or slower than on the original 3DS, because restored frames had changed their length, and their timing now follows the original. The title screen reads "Steam Enhanced v1.0.1". The executable and every picture other than the title logo are the same as v1.0. There is also a LayeredFS zip for Luma3DS now, so you can copy two files to your SD card instead of building a `.cia`.
 - **v1.0**: the first public release. Earlier builds were private test builds.
 
 ## What has been tested
@@ -26,10 +26,11 @@ Finished:
 - v1.0.1 changes data only, as v1.0 did. I checked the characters whose poses it moves on the Azahar emulator, by capture. Two of those poses never came up on screen, so I checked them in the data only.
 - The scenes that come late in each game are checked in the data. For the pieces I fixed late in development, I also swapped them into early scenes on the emulator so I could see them drawn.
 - Existing saves work. The save files were byte-identical before and after each emulator run.
+- The LayeredFS zip: I booted the original game on Azahar with only its two files loaded, and the title screen showed v1.0.1.
 
 Not finished:
 
-- I haven't run v1.0.1 on a real 3DS yet.
+- I haven't run v1.0.1 on a real 3DS yet, by either route.
 - I haven't played the late-game scenes on real hardware.
 - Some of the character files are larger than the ones they replace. Every character I brought on screen in the emulator or on the console loaded and played correctly. Characters I didn't bring on screen haven't been checked that way.
 
@@ -44,9 +45,10 @@ If something looks wrong, please [open an issue](https://github.com/Akoi89/aat-3
 ## Files
 
 - The xdelta patch for the US game. It contains no game files, and you need your own copy of the game.
+- The LayeredFS zip for Luma3DS, optional. It holds the game's changed graphics archive (about 115 MB), so unlike the xdelta it is a modified copy of one of the game's files, and it only works with the original US game installed.
 - The README, with the exact steps, file sizes and SHA-256 hashes.
 
-You make the installable `.cia` yourself by applying the patch to a decrypted dump of your own US game. The [README](README.md) has the dump method, the patching steps and the hash check.
+With the xdelta you make the installable `.cia` yourself by applying the patch to a decrypted dump of your own US game. The [README](README.md) has the dump method, the patching steps and the hash check. The LayeredFS route has its own short steps in the same README.
 
 ## Credits
 
